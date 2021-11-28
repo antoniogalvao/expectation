@@ -2,6 +2,7 @@ import { Router } from "express";
 import { AuthenticateUserController } from "./controller/AuthenticateUserController";
 import { CreateMessageController } from "./controller/CreateMessageController";
 import { GetLastMessagesController } from "./controller/GetLastMessagesController";
+import { ProfileUserController } from "./controller/ProfileUserController";
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
 
 const router = Router();
@@ -15,5 +16,7 @@ router.post(
 );
 
 router.get("/messages", new GetLastMessagesController().handle);
+
+router.get("/profile", ensureAuthenticated, new ProfileUserController().handle);
 
 export { router };
